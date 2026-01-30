@@ -34,5 +34,8 @@ It has been extracted to be isolated from Flutter and can be used with other fra
   s.public_header_files = 'ios/Classes/*.h'
   s.frameworks = 'AVFoundation', 'MediaPlayer'
 
+  # Support for modular headers
+  s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
+
 
 end
