@@ -29,6 +29,7 @@ It has been extracted to be isolated from Flutter and can be used with other fra
   s.source           = { :git => 'https://github.com/Delos-Matrix/flutter_sound_core.git', :tag => s.version}
 
   s.ios.deployment_target = '12.0'
+  s.static_framework = true
 
   s.source_files = 'ios/Classes/*'
   s.public_header_files = 'ios/Classes/*.h'
