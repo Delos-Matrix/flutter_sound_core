@@ -1,2 +1,22 @@
 .DS_Store
 
+# Gradle files (Android)
+.gradle/
+build/
+*.iml
+.idea/
+local.properties
+
+# iOS
+*.xcworkspace
+!default.xcworkspace
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+DerivedData/
+
+# Flutter/Dart
+.dart_tool/
+.packages
+.pub-cache/
+.pub/

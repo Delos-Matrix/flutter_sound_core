@@ -233,14 +233,33 @@ int AudioRecorderEngine::startRecorder()
 
 void AudioRecorderEngine::stopRecorder()
 {
-        [engine stop];
+        // CRITICAL FIX: Set status to 0 FIRST to signal block to stop processing
+        status = 0;
+
+        // CRITICAL FIX: Remove tap BEFORE stopping engine to prevent use-after-free
+        if (engine != nil)
+        {
+                AVAudioInputNode* inputNode = [engine inputNode];
+                if (inputNode != nil)
+                {
+                        [inputNode removeTapOnBus:0];
+                }
+                [engine stop];
+
+                // Ensure all pending blocks on main queue complete before proceeding
+                dispatch_sync(dispatch_get_main_queue(), ^{
+                    // This synchronization point ensures tap blocks have finished
+                });
+        }
+
         [fileHandle closeFile];
+
         if (previousTS != 0)
         {
                 dateCumul += CACurrentMediaTime() * 1000 - previousTS;
                 previousTS = 0;
         }
-        status = 0;
+
         engine = nil;
 }
 
