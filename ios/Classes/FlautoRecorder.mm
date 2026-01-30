@@ -303,13 +303,20 @@ AudioRecInterface* audioRec;
           [self stopRecorderTimer];
           if (audioRec != nil)
           {
+                AudioRecInterface* recToDelete = audioRec;
+                audioRec = nil; // Set to nil first so new operations won't use it
+
                 try {
-                        audioRec -> stopRecorder();
+                        recToDelete -> stopRecorder();
                 } catch ( NSException* e)
                 {
                 }
-                delete audioRec;
-                audioRec = nil;
+
+                // Delay deletion to let any pending tap blocks complete
+                // Use dispatch_after to avoid blocking the current thread
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05 * NSEC_PER_SEC)), dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    delete recToDelete;
+                });
           }
           [self logDebug:  @"iOS: <--- stop (flautoRecorder)"];
 
