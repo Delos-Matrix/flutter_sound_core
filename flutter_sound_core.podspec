@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = 'flutter_sound_core'
-  s.version          = '9.28.0'
+  s.version          = '9.28.0-fix-race-condition'
   s.summary          = 'Provides simple recorder and player functionalities for iOS platform.'
 
 # This description is used to generate tags and improve search results.
@@ -23,10 +23,10 @@ This code was originally inside the flutter_sound/ios directory.
 It has been extracted to be isolated from Flutter and can be used with other frameworks.
                        DESC
 
-  s.homepage         = 'https://github.com/canardoux/flutter_sound_core'
+  s.homepage         = 'https://github.com/Delos-Matrix/flutter_sound_core'
   s.license          = { :type => 'MPL2', :file => 'LICENSE' }
   s.author           = { 'larpoux' => 'larpoux@gmail.com' }
-  s.source           = { :git => 'https://github.com/canardoux/flutter_sound_core.git', :tag => s.version}
+  s.source           = { :git => 'https://github.com/Delos-Matrix/flutter_sound_core.git', :tag => s.version}
 
   s.ios.deployment_target = '12.0'
 
