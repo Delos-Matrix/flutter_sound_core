@@ -245,11 +245,6 @@ void AudioRecorderEngine::stopRecorder()
                         [inputNode removeTapOnBus:0];
                 }
                 [engine stop];
-
-                // Ensure all pending blocks on main queue complete before proceeding
-                dispatch_sync(dispatch_get_main_queue(), ^{
-                    // This synchronization point ensures tap blocks have finished
-                });
         }
 
         [fileHandle closeFile];
